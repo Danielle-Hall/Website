@@ -244,12 +244,20 @@ INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES ('Unknown Board', 999);
 													<li>Understand requirements for design automation.</li>
 												</ul>
 											</blockquote>
-											<p>Assignment Details:
+											<p>For this assignment, the textbook: "Data Wrangling with Python" was referred to. I used the textbook's repository to access two .csv files that required cleaning. These files were MICS surveys from UNICEF. After downloading the files, I then followed the instructions within the textbook to properly clean the datasets using Python. 
+												The first step was to replace the headers by using header subsitution in Python. The below are examples of how I achieved that by following the Python code examples in the textbook, with some of the code being modified to work with Python 3. 
+												<span class="image fit"><img src="images/DBD Header cleaning.png" alt="" /></span>
+												<span class="image fit"><img src="images/DBD Header cleaning 2.png" alt="" /></span>
+												After running the above code, there were so many matches that my jupyter notebook crashed! 
+												<span class="image fit"><img src="images/DBD Header cleaning 3.png" alt="" /></span>
+												The textbook and lecturecast also displayed how to do the same task using a zip method in Python. Using the zip method it was discovered that the lengths of the data and header rows are not the same, indicating that the MICS surveys may have a different number of questions for different countries. 
+												Next, the textbook details a script that zips the header and data together. Unfortunately, my computer disagreed with such a large script. However, reading the textbook allowed me to understand the necessity of cleaning data 
+												and ensuring that headers match, that dupes need to be identified and corrected, missing data needs to be dealt with, and data might even need to be merged or manipulated in order to be used to its utmost potential. 
 											</p>
 										</div>
 										<div class="col-6 col-12-small">
 											<h3>API Security Requirements</h3>
-											<h4><i>Objective:</i></h4>
+											<h4><i>Objective: Evaluate the security requirements of an API of your choice and write a brief security requirements specification which mitigate against any risks associated with the API.</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
@@ -259,7 +267,7 @@ INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES ('Unknown Board', 999);
 												</ul>
 											</blockquote>
 											<p> 
-											Assignment Details:
+											This assignment is very straightforward. 
 											</p>
 										</div>
 									</div>
