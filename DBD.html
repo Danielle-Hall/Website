@@ -89,39 +89,157 @@
 										</div>
 										<!-- Break -->
 										<div class="col-6 col-12-small">
+											<h3>Normalization Task</h3>
+											<h4><i>Objective: Normalize a table of data to the 3rd Normal Form (3NF), showing each step of the process.</i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Critically analyse data wrangling problems and determine appropriate methodologies, tools, and techniques (involving preparing, cleaning, exploring, creating, optimising and evaluating big data) to solve them.</li>
+													<li>Design, develop and evaluate solutions for processing datasets and solving complex problems in various environments using relevant programming paradigms.</li>
+													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real life perspectives on team roles and organisation.</li>
+												</ul>
+											</blockquote>
+											<p>The data to be normalized was first given as such:
+												<span class="image fit"><img src="images/DBD Non Normalized Table.png" alt="" /></span>
+												This data does not conform to the 1st Normal Form (1NF). To be in 1NF, the relation must be contain an atomic value. In other words, there can be no repeating groups. 
+												The following image shows how the data looks after normalizing it to the 1st Normal Form.
+												<span class="image fit"><img src="images/DBD 1NF Table.png" alt="" /></span>
+												To further normalize the table, partial dependencies must be removed. This transition to the 2nd Normal Form (2NF)results in several different tables. 
+												<span class="image fit"><img src="images/DBD 2NF Table.jpg" alt="" /></span>
+												After this, the final step to normalizing the table of data to the 3rd Normal Form is to ensure that no transitive dependencies exist. This results in the final following schema:
+												<span class="image fit"><img src="images/DBD 3NF Table.jpg" alt="" /></span>
+												Five tables were made in total, a Student table, a Course table, an Enrollment table, a Teacher table, and an Exam board table. 
+											</p>
+										</div>
+										<div class="col-6 col-12-small">
+											<h3>Data Build</h3>
+											<h4><i>Objective:</i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Critically analyse data wrangling problems and determine appropriate methodologies, tools, and techniques (involving preparing, cleaning, exploring, creating, optimising and evaluating big data) to solve them.</li>
+													<li>Design, develop and evaluate solutions for processing datasets and solving complex problems in various environments using relevant programming paradigms.</li>
+													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real life perspectives on team roles and organisation.</li>
+												</ul>
+											</blockquote>
+											<p>This assignment builds off of the Normalization Task, which had us normalize a given table to the 3rd Normal Form. In this assignment, we build a relational database system, with linked tables, to demonstrate our knowledge of primary and secondary keys. 
+												Here is the following SQL code used to create the relational database system:
+													<pre><code>
+														-- Create Student Table
+CREATE TABLE Student (
+    StudentNumber INT PRIMARY KEY,
+    StudentName VARCHAR(100),
+    ExamScore INT,
+    Support BOOLEAN,
+    DateOfBirth DATE
+);
+
+-- Create Course Table
+CREATE TABLE Course (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(100)
+);
+
+-- Create Enrollment Table
+CREATE TABLE Enrollment (
+    StudentNumber INT,
+    CourseID INT,
+    PRIMARY KEY (StudentNumber, CourseID),
+    FOREIGN KEY (StudentNumber) REFERENCES Student(StudentNumber),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+);
+
+-- Create Teacher Table
+CREATE TABLE Teacher (
+    TeacherName VARCHAR(100),
+    CourseID INT,
+    PRIMARY KEY (TeacherName, CourseID),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+);
+
+-- Create ExamBoard Table
+CREATE TABLE ExamBoard (
+    ExamBoard VARCHAR(100),
+    CourseID INT,
+    PRIMARY KEY (ExamBoard, CourseID),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+);
+
+-- Insert data into Student Table
+INSERT INTO Student (StudentNumber, StudentName, ExamScore, Support, DateOfBirth) VALUES
+(1001, 'Bob Baker', 78, FALSE, '2001-08-25'),
+(1002, 'Sally Davies', 55, TRUE, '1999-10-02'),
+(1003, 'Mark Hammill', 90, FALSE, '1995-06-05'),
+(1004, 'Anas Ali', 70, FALSE, '1980-08-03'),
+(1005, 'Cheuk Yin', 45, TRUE, '2002-05-01');
+
+-- Insert data into Course Table
+INSERT INTO Course (CourseID, CourseName) VALUES
+(1, 'Computer Science'),
+(2, 'Maths'),
+(3, 'Physics'),
+(4, 'Biology'),
+(5, 'Music');
+
+-- Insert data into Enrollment Table
+INSERT INTO Enrollment (StudentNumber, CourseID) VALUES
+(1001, 1),
+(1001, 2),
+(1002, 3),
+(1002, 2),
+(1002, 4),
+(1002, 5),
+(1003, 1),
+(1003, 2),
+(1003, 3),
+(1004, 2),
+(1004, 3),
+(1004, 4),
+(1005, 1),
+(1005, 2),
+(1005, 5);
+
+-- Insert data into Teacher Table
+INSERT INTO Teacher (TeacherName, CourseID) VALUES
+('Mr Jones', 1),
+('Ms Parker', 2),
+('Mr Peters', 3),
+('Mrs Patel', 4),
+('Ms Daniels', 5);
+
+-- Insert data into ExamBoard Table
+INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES
+('BCS', 1),
+('EdExcel', 2),
+('OCR', 3),
+('WJEC', 4),
+('AQA', 2),
+('AQA', 5);
+													</code></pre>
+													Then we tested referential integrity. 
+													<pre><code>
+														-- This should fail because there is no StudentNumber 9999
+INSERT INTO Enrollment (StudentNumber, CourseID) VALUES (9999, 1);
+
+-- This should fail because there is no CourseID 999
+INSERT INTO Enrollment (StudentNumber, CourseID) VALUES (1001, 999);
+
+-- This should fail because there is no CourseID 999
+INSERT INTO Teacher (TeacherName, CourseID) VALUES ('Mr Unknown', 999);
+
+-- This should fail because there is no CourseID 999
+INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES ('Unknown Board', 999);
+													</code></pre>
+												As all the tests failed, the database should be in 3NF and maintain referential integrity. 										
+											</p>
+										</div>
+										<div class="col-6 col-12-small">
 											<h3>Data Cleaning</h3>
 											<h4><i>Objective:</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
-													<li></li>
-													<li></li>
-												</ul>
-											</blockquote>
-											<p>Assignment Details:
-											</p>
-										</div>
-										<div class="col-6 col-12-small">
-											<h3>Normalization Task</h3>
-											<h4><i>Objective: </i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li></li>
-													<li></li>
-												</ul>
-											</blockquote>
-											<p>Assignment Details:
-											</p>
-										</div>
-										<div class="col-6 col-12-small">
-											<h3>Data Build Task</h3>
-											<h4><i>Objective:</i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li></li>
-													<li></li>
+													<li>Examine and understand factors that affect data cleaning.</li>
 												</ul>
 											</blockquote>
 											<p>Assignment Details:
