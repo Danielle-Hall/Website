@@ -125,7 +125,7 @@
 											<p>This assignment builds off of the Normalization Task, which had us normalize a given table to the 3rd Normal Form. In this assignment, we build a relational database system, with linked tables, to demonstrate our knowledge of primary and secondary keys. 
 												Here is the following SQL code used to create the relational database system:
 													<pre><code>
-														-- Create Student Table
+-- Create Student Table
 CREATE TABLE Student (
     StudentNumber INT PRIMARY KEY,
     StudentName VARCHAR(100),
@@ -218,7 +218,7 @@ INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES
 													</code></pre>
 													Then we tested referential integrity. 
 													<pre><code>
-														-- This should fail because there is no StudentNumber 9999
+-- This should fail because there is no StudentNumber 9999
 INSERT INTO Enrollment (StudentNumber, CourseID) VALUES (9999, 1);
 
 -- This should fail because there is no CourseID 999
