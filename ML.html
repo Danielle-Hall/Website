@@ -107,7 +107,8 @@
 												network (ResNet). The notebook for that attempt can be found
 												<a href="Assignments/ResNet failure.ipynb" target="_blank"> "here"</a>. Unfortunately, while ResNet algorithms are superior, I was unable to make it as accurate 
 												as I wanted it to be, so I ended up using the CNN as the neural network for the presentation. My presentation can be found
-												<a href="Assignments/Oral Presentation.pptx target="_blank"> "here"</a>, however here are some of the visualizations I created for the presentation. 
+												<a href="Assignments/Oral Presentation.pptx target="_blank"> "here"</a>. The transcript can be found
+												<a href="Assignments/Transcript.pdf target="_blank"> "here"</a>. Below are some of the visualizations I created for the presentation. 
 												<div class="row">
 													<div class="column">
 													  <img src="images/Accuracy 1.png" style="width:100%">
@@ -124,208 +125,158 @@
 													  <img src="images/Model Architecture 2.png" style="width:100%">
 													</div>
 												</div> 
-
 											</p>
 											<h4><i>Reflections on Project Report</i></h4>
 											<p>
-												
-											</p>
-										
-										<h3>Normalization Task</h3>
-											<h4><i>Objective: Normalize a table of data to the 3rd Normal Form (3NF), showing each step of the process.</i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li>Critically analyse data wrangling problems and determine appropriate methodologies, tools, and techniques (involving preparing, cleaning, exploring, creating, optimising and evaluating big data) to solve them.</li>
-													<li>Design, develop and evaluate solutions for processing datasets and solving complex problems in various environments using relevant programming paradigms.</li>
-													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real life perspectives on team roles and organisation.</li>
-												</ul>
-											</blockquote>
-											<p>The data to be normalized was first given as such:
-												<span class="image fit"><img src="images/DBD Non Normalized Table.png" alt="" /></span>
-												This data does not conform to the 1st Normal Form (1NF). To be in 1NF, the relation must be contain an atomic value. In other words, there can be no repeating groups. 
-												The following image shows how the data looks after normalizing it to the 1st Normal Form.
-												<span class="image fit"><img src="images/DBD 1NF Table.png" alt="" /></span>
-												To further normalize the table, partial dependencies must be removed. This transition to the 2nd Normal Form (2NF)results in several different tables. 
-												<span class="image fit"><img src="images/DBD 2NF Table.jpg" alt="" /></span>
-												After this, the final step to normalizing the table of data to the 3rd Normal Form is to ensure that no transitive dependencies exist. This results in the final following schema:
-												<span class="image fit"><img src="images/DBD 3NF Table.jpg" alt="" /></span>
-												Five tables were made in total, a Student table, a Course table, an Enrollment table, a Teacher table, and an Exam board table. 
-											</p>
-										
-										
-
-										<h3>Data Build</h3>
-											<h4><i>Objective: Build a relational database system with linked tables based  off of the Normalization Task data.</i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li>Critically analyse data wrangling problems and determine appropriate methodologies, tools, and techniques (involving preparing, cleaning, exploring, creating, optimising and evaluating big data) to solve them.</li>
-													<li>Design, develop and evaluate solutions for processing datasets and solving complex problems in various environments using relevant programming paradigms.</li>
-													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real life perspectives on team roles and organisation.</li>
-												</ul>
-											</blockquote>
-											<p>This assignment builds off of the Normalization Task, which had us normalize a given table to the 3rd Normal Form. In this assignment, we build a relational database system, with linked tables, to demonstrate our knowledge of primary and secondary keys. 
-												Here is the following SQL code used to create the relational database system:
-													<pre><code>
--- Create Student Table
-CREATE TABLE Student (
-    StudentNumber INT PRIMARY KEY,
-    StudentName VARCHAR(100),
-    ExamScore INT,
-    Support BOOLEAN,
-    DateOfBirth DATE
-);
-
--- Create Course Table
-CREATE TABLE Course (
-    CourseID INT PRIMARY KEY,
-    CourseName VARCHAR(100)
-);
-
--- Create Enrollment Table
-CREATE TABLE Enrollment (
-    StudentNumber INT,
-    CourseID INT,
-    PRIMARY KEY (StudentNumber, CourseID),
-    FOREIGN KEY (StudentNumber) REFERENCES Student(StudentNumber),
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
-);
-
--- Create Teacher Table
-CREATE TABLE Teacher (
-    TeacherName VARCHAR(100),
-    CourseID INT,
-    PRIMARY KEY (TeacherName, CourseID),
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
-);
-
--- Create ExamBoard Table
-CREATE TABLE ExamBoard (
-    ExamBoard VARCHAR(100),
-    CourseID INT,
-    PRIMARY KEY (ExamBoard, CourseID),
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
-);
-
--- Insert data into Student Table
-INSERT INTO Student (StudentNumber, StudentName, ExamScore, Support, DateOfBirth) VALUES
-(1001, 'Bob Baker', 78, FALSE, '2001-08-25'),
-(1002, 'Sally Davies', 55, TRUE, '1999-10-02'),
-(1003, 'Mark Hammill', 90, FALSE, '1995-06-05'),
-(1004, 'Anas Ali', 70, FALSE, '1980-08-03'),
-(1005, 'Cheuk Yin', 45, TRUE, '2002-05-01');
-
--- Insert data into Course Table
-INSERT INTO Course (CourseID, CourseName) VALUES
-(1, 'Computer Science'),
-(2, 'Maths'),
-(3, 'Physics'),
-(4, 'Biology'),
-(5, 'Music');
-
--- Insert data into Enrollment Table
-INSERT INTO Enrollment (StudentNumber, CourseID) VALUES
-(1001, 1),
-(1001, 2),
-(1002, 3),
-(1002, 2),
-(1002, 4),
-(1002, 5),
-(1003, 1),
-(1003, 2),
-(1003, 3),
-(1004, 2),
-(1004, 3),
-(1004, 4),
-(1005, 1),
-(1005, 2),
-(1005, 5);
-
--- Insert data into Teacher Table
-INSERT INTO Teacher (TeacherName, CourseID) VALUES
-('Mr Jones', 1),
-('Ms Parker', 2),
-('Mr Peters', 3),
-('Mrs Patel', 4),
-('Ms Daniels', 5);
-
--- Insert data into ExamBoard Table
-INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES
-('BCS', 1),
-('EdExcel', 2),
-('OCR', 3),
-('WJEC', 4),
-('AQA', 2),
-('AQA', 5);
-													</code></pre>
-													Then we tested referential integrity. 
-													<pre><code>
--- This should fail because there is no StudentNumber 9999
-INSERT INTO Enrollment (StudentNumber, CourseID) VALUES (9999, 1);
-
--- This should fail because there is no CourseID 999
-INSERT INTO Enrollment (StudentNumber, CourseID) VALUES (1001, 999);
-
--- This should fail because there is no CourseID 999
-INSERT INTO Teacher (TeacherName, CourseID) VALUES ('Mr Unknown', 999);
-
--- This should fail because there is no CourseID 999
-INSERT INTO ExamBoard (ExamBoard, CourseID) VALUES ('Unknown Board', 999);
-													</code></pre>
-												As all the tests failed, the database should be in 3NF and maintain referential integrity. 										
-											</p>
-										
-										<h3>Data Cleaning</h3>
-											<h4><i>Objective: Follow textbook instructions to clean data</i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li>Clean and transform data using the data pipeline as a guide.</li>
-													<li>Examine and understand factors that affect data cleaning.</li>
-													<li>Understand requirements for design automation.</li>
-												</ul>
-											</blockquote>
-											<p>For this assignment, the textbook: "Data Wrangling with Python" was referred to. I used the textbook's repository to access two .csv files that required cleaning. These files were MICS surveys from UNICEF. After downloading the files, I then followed the instructions within the textbook to properly clean the datasets using Python. 
-												The first step was to replace the headers by using header subsitution in Python. The below are examples of how I achieved that by following the Python code examples in the textbook, with some of the code being modified to work with Python 3. 
-												<span class="image fit"><img src="images/DBD Header cleaning.png" alt="" /></span>
-												<span class="image fit"><img src="images/DBD Header cleaning 2.png" alt="" /></span>
-												After running the above code, there were so many matches that my jupyter notebook crashed! 
-												<span class="image fit"><img src="images/DBD Header cleaning 3.png" alt="" /></span>
-												The textbook and lecturecast also displayed how to do the same task using a zip method in Python. Using the zip method it was discovered that the lengths of the data and header rows are not the same, indicating that the MICS surveys may have a different number of questions for different countries. 
-												Next, the textbook details a script that zips the header and data together. Unfortunately, my computer disagreed with such a large script. However, reading the textbook allowed me to understand the necessity of cleaning data 
-												and ensuring that headers match, that dupes need to be identified and corrected, missing data needs to be dealt with, and data might even need to be merged or manipulated in order to be used to its utmost potential. 
-											</p>
-										
-										
-
-										<h3>API Security Requirements</h3>
-											<h4><i>Objective: Evaluate the security requirements of an API of your choice and write a brief security requirements specification which mitigate against any risks associated with the API.</i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li>Identify and manage challenges, security issues and risks, limitations, and opportunities in data wrangling.</li>
-													<li>Critically analyse data wrangling problems and determine appropriate methodologies, tools, and techniques (involving preparing, cleaning, exploring, creating, optimising and evaluating big data) to solve them.</li>
-													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real life perspectives on team roles and organisation.</li>
-												</ul>
-											</blockquote>
-											<p> 
-											This assignment is very straightforward. One of the readings for this part of the module was the article “What is an API and Why Ecommerce Sites Use Them” (Big Commerce, n.d.). 
-											The article first defines what an API is: “…an acronym for application programming interface…a set of protocols for building application software.”.  After understanding what an API is, 
-											now we must identify one so we can evaluate their safety requirements. 
-											<br>
-											<br>
-												The API that I chose was the Google Maps API. This API allows developers to integrate Google Maps into their own applications. Google Maps also has their own security guidance page that details the 
-											recommended best practices to follow for increased security, which may be helpful to those who wish to use the API (Google Developers, n.d.). The main way Google Maps ensures applications that use 
-											their API are secure is to enforce the usage of API keys or Oauth. The major security concern appears to be unauthorized access to the API keys. Google recommends restricting the keys and deleting 
-											any unused ones, as well as regularly checking key and API usage for unusual activity patterns to identify potential vulnerabilities. As this was originally meant to be a team activity, I took the 
-											opportunity to discuss and evaluate the security requirements of my chosen API with my father, who was a computer engineer before he retired. He brought up the fact that the data would also have to be 
-											encrypted to ensure the data is stored safely and if there is a data breach, the users are protected. Discussing information with others is a great way to further your understanding of a topic. 
-											
+												For this assignment, the sole learning outcome was to be able to 
+												"apply and critically appraise machine learning techniques to real-world problems, particularly where technical risk and uncertainty is involved". 
+												I believe that I achieved this learning outcome, especially when it comes to critically appriasing machine learning techniques. Within my presentation, 
+												I discuss in detail the benefits of using certain techniques, why ResNet is superior to CNN, the trade off of a larger batchsize (more power, less accuracy), and more. 
 											</p>
 									
-									<hr class="major" />
-								
+								<hr class="major" />
+
+									<h2>Other Activities</h2>
+
+										<h3>EDA Tutorial</h3>
+											<h4><i>Objective: Complete a tutorial on Exploratory Data Analysis using a Jupyter Notebook tutorial file.</i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+													<li>Apply and critically appraise machine learning techniques to real-world problems, particularly where technical risk and uncertainty is involved.</li>
+													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real-life perspectives on team roles and organisation.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+										
+										<h3>Correlation and Regression</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>	
+
+											</p>
+
+										<h3>Linear Regression with Scikit-Learn</h3>
+											<h4><i>Objective:</i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real-life perspectives on team roles and organisation.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>	
+
+											</p>
+
+										<h3>Jaccard Coefficient Calculations</h3>
+											<h4><i>Objective: Calculate the Jaccard Coefficient Calculations in a given table.</i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+											</blockquote>
+											<p>
+												I was given the following table and told to calculate the Jaccard Coefficient for the following pairs: "Jack and Mary", "Jack and Jim", and "Mary and Jim". 
+												To properly calculate the Jaccard coefficient, first I discarded the gender column and transformed the rest of the table into binaries. 
+												<div class="row">
+													<div class="column">
+													  <img src="images/Jaccard 1.png" style="width:100%">
+													</div>
+													<div class="column">
+													  <img src="images/Jaccard 2.png" style="width:100%">
+													</div>
+												</div> 
+												After converting the table into binaries, we calculate the intersection between each pair. For example, Jack and Mary both have Fever and Test, so they have an intersection of 2. 
+												Jack and Jim have an intersection of 2 as well, and so does Mary and Jim. 
+												We also need to find out the union between the pairs. According to the binary table, Jack and Mary have 5 total attributes. Jack and Jim have 4, and Mary and Jim have 6. 
+												The Jaccard coefficients are as follows: Jack and Mary = 2/5 = 0.4, Jack and Jim = 2/4 = 0.5, Mary and Jim = 2/6 ≈ 0.333.  
+											</p>	
+
+											</p>
+
+										<h3>K-Means Clustering Tutorial</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real-life perspectives on team roles and organisation.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+
+										<h3>Perceptron Activities</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+
+										<h3>Gradient Cost Function</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+
+										<h3>CNN Model Activity</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+
+										<h3>CNN Tutorial</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+
+										<h3>Model Performance Measurement</h3>
+											<h4><i>Objective: </i></h4>
+											<blockquote>
+												<p>Learning Outcomes</p>
+												<ul>
+													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
+											</blockquote>
+											<p>
+												What is task about?
+											</p>
+									
 								</section>
 
 						</div>
