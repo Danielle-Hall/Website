@@ -154,7 +154,7 @@
 											</p>
 										
 										<h3>Correlation and Regression</h3>
-											<h4><i>Objective: </i></h4>
+											<h4><i>Objective: Run a few Jupyter notebooks and change variables as needed to observe how the change in data points impacts correlation and regression. </i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
@@ -162,13 +162,25 @@
 													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
 											</blockquote>
 											<p>
-												What is task about?
+												This task just asked the student to play around with data points to understand how they can impact correlation and regression. 
+												The below image is an example of how much a change in data points impacts Pearson's Correlation.
+											<div class="row">
+												<div class="column">
+												  <img src="images/original pearson.png" style="width:100%">
+												</div>
+												<div class="column">
+													<img src="images/Decreasing number pearson.png" style="width:100%">
+												  </div>
+												<div class="column">
+												  <img src="images/Increasing number pearson.png" style="width:100%">
+												</div>
+											</div> 
 											</p>	
 
 											</p>
 
 										<h3>Linear Regression with Scikit-Learn</h3>
-											<h4><i>Objective:</i></h4>
+											<h4><i>Objective: Undertake a correlation and a regression task using Scikit-Learn.</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
@@ -177,7 +189,20 @@
 													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real-life perspectives on team roles and organisation.</li>
 											</blockquote>
 											<p>
-												What is task about?
+												<u>Task A: Correlation</u>=
+												<br> 
+												<br> 
+												This task asked students to clean two datasets and then investigate any correlation between the mean population of each country in the dataset 
+												and the mean per capita GDP. It also asked students to generate a plot and briefly interpret it, as well as evaluate the Pearson Correlation Coefficient. 
+												Below is one of the plots created while undergoing this task. 
+												<span class="image fit"><img src="images/Correlation Image.png" alt="" /></span>
+												<br>
+												<u>Task B: Regression</u>
+												<br> 
+												<br> 
+												This task asked students to perform linear regression where the independent variable is the mean population of each country (from 2001 to 2021) 
+												and dependent variable is mean per capita GDP (from 2001 to 2021). Below is the plot created from undergoing that task. 
+												<span class="image fit"><img src="images/Linear Regression.png" alt="" /></span>
 											</p>	
 
 											</p>
@@ -188,7 +213,7 @@
 												<p>Learning Outcomes</p>
 												<ul>
 													<li>Articulate the legal, social, ethical and professional issues faced by machine learning professionals.</li>
-													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
+														<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
 											</blockquote>
 											<p>
 												I was given the following table and told to calculate the Jaccard Coefficient for the following pairs: "Jack and Mary", "Jack and Jim", and "Mary and Jim". 
@@ -210,7 +235,7 @@
 											</p>
 
 										<h3>K-Means Clustering Tutorial</h3>
-											<h4><i>Objective: </i></h4>
+											<h4><i>Objective: Complete one of three tasks to develop an understanding of how to use K-Means Clustering.</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
@@ -219,33 +244,38 @@
 													<li>Systematically develop and implement the skills required to be effective member of a development team in a virtual professional environment, adopting real-life perspectives on team roles and organisation.</li>
 											</blockquote>
 											<p>
-												What is task about?
-											</p>
-
-										<h3>Perceptron Activities</h3>
-											<h4><i>Objective: </i></h4>
-											<blockquote>
-												<p>Learning Outcomes</p>
-												<ul>
-													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
-											</blockquote>
-											<p>
-												What is task about?
+												There are three tasks that students could choose from for this tutorial. I chose Task A, which had students perform K-Means clustering using 
+												the Iris dataset. There were a few steps that had to be done first, which included removing several columns. While the value of K can be varied, this 
+												task had students use K = 3. After creating the clusters, the task was to then check how similar the three clusters are as compared to the labels 
+												of species – setosa, versicolour, and verginica. As can be seen in the confusion matrix below, cluster 2 consists mostly of the species virginica with some versicolour, 
+												cluster 0 consists mostly of the species versicolour with some virginica, and cluster 1 consists entirely of setosa. 
+												<div class="row">
+													<div class="column">
+													  <img src="images/K means clustering.png" style="width:100%">
+													</div>
+													<div class="column">
+													  <img src="images/Confusion matrix of K means clustering.png" style="width:100%">
+													</div>
+												</div> 
 											</p>
 
 										<h3>Gradient Cost Function</h3>
-											<h4><i>Objective: </i></h4>
+											<h4><i>Objective: Run a Jupyter notebook and change the iteration number and learning_rate and observe how cost decreases.</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
 													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
 											</blockquote>
 											<p>
-												What is task about?
+												The original Gradient Cost Function had an iteration number of 100 and a learning_rate of 0.08. 
+												When running the notebook without any changes, the cost started at 89.0 at iteration 0, and ended up at cost 0.00412 at iteration 99. 
+												Changing the iteration number to be smaller resulted in no real interesting changes, as we already had records of all the iterations up to 99. 
+												However, changing the learning_rate to 0.16, double what it originally was, resulted in extremely high costs, with iteration 99 having a cost of 1.1171143851204643e+90!
 											</p>
 
 										<h3>CNN Model Activity</h3>
-											<h4><i>Objective: </i></h4>
+											<h4><i>Objective: Read the Wall (2019) article and record your thoughts on the ethical and social implications of this CNN technology.
+												In addition, run a CNN model and review different sections of the algorithm. Change the input image for prediction by changing the value of this variable - plt.imshow(x_test[16] - from 16 to value of your choice (1-15) and see whether the model predicts correctly.</i></h4>
 											<blockquote>
 												<p>Learning Outcomes</p>
 												<ul>
@@ -253,7 +283,15 @@
 													<li>Understand the applicability and challenges associated with different datasets for the use of machine learning algorithms.</li>
 											</blockquote>
 											<p>
-												What is task about?
+												The Wall (2019) article, which can be found
+												<a href="https://www.bbc.com/news/business-48842750" target="_blank"> "here"</a>, 
+												discusses the various uses of Facial Recognition (FR) technology, and the ethics behind its use. The datasets that FR technology is trained on 
+												are predominantly white, leaving minority individuals at the risk of being misidentified, wrongly persecuted, and otherwise harmed or discriminated against. 
+												While the technology may have a place in the future, I personally believe that it should not be used until the risk of wrongly harming an innocent is as close to 
+												zero as it can possibly get. 
+												<br> 
+												<br> 
+												The other part of this task has use run a CNN model and change the input image. I decided to change the input image to 5, as it is my lucky number. The CNN accurately predicted my image, which was  
 											</p>
 
 										<h3>Model Performance Measurement</h3>
